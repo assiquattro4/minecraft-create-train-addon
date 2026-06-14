@@ -1,24 +1,26 @@
 package com.assiquattro4.create_train_addon.entity;
 
+import com.assiquattro4.create_train_addon.physics.PhysicsCalculator;
+import com.assiquattro4.create_train_addon.physics.PhysicsStateMachine;
 import com.simibubi.create.content.trains.entity.Train;
-import java.util.UUID;
+import net.minecraft.world.phys.Vec3;
 
 public class RealisticTrain extends Train {
 
-    // Costruttore base
-    public RealisticTrain(UUID id, UUID owner) {
-        super(id, owner);
-    }
-
-    // Qui inizieremo a iniettare la fisica
     @Override
     public void tick() {
-        super.tick(); // Manteniamo la logica di base per non rompere il rendering
-        applyRealisticPhysics();
-    }
+        super.tick();
 
-    private void applyRealisticPhysics() {
-        // Placeholder: qui calcolerai massa e attrito in futuro
-        // Esempio: if (this.speed > limit) { derail(); }
+        // 1. Calcoli (come visto prima)
+        double netThrust = PhysicsCalculator.calculateForces(...).netThrust();
+        
+        // 2. Applicazione della fisica
+        // Usiamo la posizione del carrello per il fumo
+        Vec3 pos = this.carriages.get(0).getAnchorPosition();
+        
+        PhysicsStateMachine.applyPhysicsState(netThrust, this.getTotalMass(), pos, this.level);
+        
+        // 3. Modifica effettiva della velocità del treno
+        this.speed += (netThrust / this.getTotalMass());
     }
 }
