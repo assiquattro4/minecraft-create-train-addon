@@ -24,7 +24,7 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.create_train_addon]]
-modId="aeronautics" # Assicurati che l'ID sia quello corretto del file jar
+modId="create_aeronautics" # Assicurati che l'ID sia quello corretto del file jar
 mandatory=true
 ordering="AFTER"
 side="BOTH"
