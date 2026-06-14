@@ -6,8 +6,19 @@ import com.simibubi.create.content.trains.entity.Train;
 import net.minecraft.world.phys.Vec3;
 
 public class RealisticTrain extends Train {
+    
+    // Il profilo fisico (il "DNA" del treno)
+    public final TrainPhysicsProfile physicsProfile;
 
-    // ... dentro RealisticTrain.java
+    public RealisticTrain(UUID id, UUID owner) {
+        super(id, owner);
+        // Inizializza con valori standard
+        this.physicsProfile = new TrainPhysicsProfile();
+        System.out.println("Treno Fisico istanziato con successo: " + id);
+    }
+    
+    // Ricorda di aggiungere i metodi read/write per salvare physicsProfile
+}
 
 @Override
 public void tick() {
