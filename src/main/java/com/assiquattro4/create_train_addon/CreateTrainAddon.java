@@ -1,17 +1,17 @@
 package com.assiquattro4.create_train_addon;
 
-import com.assiquattro4.create_train_addon.interaction.CouplingHandler;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod("create_train_addon")
-public class CreateTrainAddon {
+@Mod("create_train_addon") // Deve corrispondere al modId nel toml
+public class TrainAddon {
 
-    public CreateTrainAddon(IEventBus modEventBus) {
-        // Registriamo l'handler per gli eventi di gioco (come i click del mouse)
-        NeoForge.EVENT_BUS.register(CouplingHandler.class);
+    public TrainAddon(IEventBus modEventBus) {
+        // Qui inizializziamo i registri della mod
+        System.out.println("Modulo di fisica ferroviaria inizializzato!");
         
-        System.out.println("Create Train Addon: Coupling Handler registrato.");
+        // Se hai registrato suoni, blocchi o item, li colleghi qui:
+        // ModSounds.SOUNDS.register(modEventBus);
     }
 }
