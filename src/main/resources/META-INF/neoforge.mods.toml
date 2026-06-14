@@ -1,0 +1,25 @@
+modLoader = "javafml"
+loaderVersion = "[21,)"
+license = "MIT"
+
+[[mods]]
+modId = "create_train_addon"
+version = "1.0.0"
+displayName = "Realistic Physics Train Addon"
+authors = "Assiquattro4"
+description = "Un addon per la fisica avanzata dei treni."
+
+# DICHIARA LA DIPENDENZA DA CREATE
+[[dependencies.create_train_addon]]
+modId = "create"
+mandatory = true
+versionRange = "[0.5.1,)" # Metti il range di versioni di Create supportato
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.create_train_addon]]
+modId = "sable"
+mandatory = true
+versionRange = "[0.5.1,)" # Metti il range di versioni di Create supportato
+ordering = "AFTER"
+side = "BOTH"
