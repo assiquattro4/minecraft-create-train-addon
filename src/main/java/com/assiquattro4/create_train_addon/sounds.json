@@ -1,0 +1,10 @@
+{
+  "train_stall_groan": {
+    "subtitle": "subtitles.train.stall",
+    "sounds": [ "create_train_addon:train_stall_groan" ]
+  },
+  "wheel_slip": {
+    "subtitle": "subtitles.train.slip",
+    "sounds": [ "create_train_addon:wheel_slip" ]
+  }
+}
