@@ -1,19 +1,22 @@
-public class TrainPhysicsProfile {
-    public double baseMass;
-    public double dragCoefficient;
-    public double maxSpeed;
-    // ... ecc.
+package com.assiquattro4.create_train_addon.physics;
 
-    // Metodo per serializzare i dati in NBT (Fondamentale per la persistenza)
+import net.minecraft.nbt.CompoundTag;
+
+public class TrainPhysicsProfile {
+    public double baseMass = 1000.0;
+    public double dragCoefficient = 0.5;
+
+    // Crea un nuovo tag NBT con i dati attuali
     public CompoundTag save() {
         CompoundTag tag = new CompoundTag();
-        tag.putDouble("Mass", baseMass);
-        tag.putDouble("Drag", dragCoefficient);
+        tag.putDouble("BaseMass", this.baseMass);
+        tag.putDouble("Drag", this.dragCoefficient);
         return tag;
     }
 
+    // Carica i dati dal tag NBT
     public void load(CompoundTag tag) {
-        this.baseMass = tag.getDouble("Mass");
-        this.dragCoefficient = tag.getDouble("Drag");
+        if (tag.contains("BaseMass")) this.baseMass = tag.getDouble("BaseMass");
+        if (tag.contains("Drag")) this.dragCoefficient = tag.getDouble("Drag");
     }
 }
