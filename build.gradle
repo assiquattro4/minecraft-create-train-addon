@@ -1,0 +1,39 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.gradleutils' version '3.0.0-milestone.4'
+    id 'net.neoforged.moddev' version '1.0.12'
+    // Il plugin per i Mixin è fondamentale per il tuo caso
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+}
+
+group = "com.AssiQuattro4.create_train_addon"
+version = "${mod_version}"
+
+repositories {
+    maven { url = "https://www.cursemaven.com" }
+    maven { url = "https://maven.blamejared.com/" } // Utile per molte dipendenze di Create
+    mavenCentral()
+}
+
+dependencies {
+    // NeoForge
+    implementation "net.neoforged:neoforge:${neoforge_version}"
+
+    // Create (Usa l'ID del file di CurseForge)
+    compileOnly "curse.maven:create-328085:5984620"
+
+    // Placeholder per Sable e Aeronautics
+    // Dovrai trovare i link corretti su CurseForge/Modrinth
+    // compileOnly "curse.maven:sable-ID:FILEID"
+    // compileOnly "curse.maven:aeronautics-ID:FILEID"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+// Configurazione base per i Mixin
+mixin {
+    add sourceSets.main, "mixins.create_train_addon.refmap.json"
+    config "mixins.create_train_addon.json"
+}
