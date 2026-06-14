@@ -1,39 +1,23 @@
 plugins {
-    id 'java-library'
-    id 'net.neoforged.gradleutils' version '3.0.0-milestone.4'
-    id 'net.neoforged.moddev' version '1.0.12'
-    // Il plugin per i Mixin è fondamentale per il tuo caso
-    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id 'net.neoforged.gradle.userdev' version '7.0.+' // Verifica la versione più recente
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-group = "com.AssiQuattro4.create_train_addon"
-version = "${mod_version}"
-
-repositories {
-    maven { url = "https://www.cursemaven.com" }
-    maven { url = "https://maven.blamejared.com/" } // Utile per molte dipendenze di Create
-    mavenCentral()
+minecraft {
+    accessTransformers.file('src/main/resources/META-INF/accesstransformer.cfg')
 }
 
 dependencies {
-    // NeoForge
-    implementation "net.neoforged:neoforge:${neoforge_version}"
-
-    // Create (Usa l'ID del file di CurseForge)
-    compileOnly "curse.maven:create-328085:5984620"
-
-    // Placeholder per Sable e Aeronautics
-    // Dovrai trovare i link corretti su CurseForge/Modrinth
-    // compileOnly "curse.maven:sable-ID:FILEID"
-    // compileOnly "curse.maven:aeronautics-ID:FILEID"
+    implementation "net.neoforged:neoforge:${minecraft_version}-${neoforge_version}"
+    
+    // Dipendenza cruciale: Create
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}")
+    
+    // Necessario per le dipendenze di Create
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-}
-
-// Configurazione base per i Mixin
 mixin {
-    add sourceSets.main, "mixins.create_train_addon.refmap.json"
-    config "mixins.create_train_addon.json"
+    add sourceSets.main, "create_train_addon.refmap.json"
+    config "create_train_addon.mixins.json"
 }
