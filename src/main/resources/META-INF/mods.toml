@@ -6,7 +6,7 @@ license="MIT"
 modId="create_train_addon"
 version="${mod_version}"
 displayName="Create Train Addon"
-authors="IlTuoNome"
+authors="AssiQuattro4"
 description="Addon per integrare Create con Sable e Aeronautics"
 
 # Qui definiamo le dipendenze obbligatorie
