@@ -7,20 +7,32 @@ import net.minecraft.world.phys.Vec3;
 
 public class RealisticTrain extends Train {
 
-    @Override
-    public void tick() {
-        super.tick();
+    // ... dentro RealisticTrain.java
 
-        // 1. Calcoli (come visto prima)
-        double netThrust = PhysicsCalculator.calculateForces(...).netThrust();
+@Override
+public void tick() {
+    super.tick();
+
+    // Se siamo sul server, calcoliamo la fisica
+    if (!this.level.isClientSide) {
+        // Passiamo 'this' per avere accesso a tutti i dati del treno
+        var forces = PhysicsCalculator.calculateForces(this);
         
-        // 2. Applicazione della fisica
-        // Usiamo la posizione del carrello per il fumo
+        // Applichiamo la fisica
         Vec3 pos = this.carriages.get(0).getAnchorPosition();
+        PhysicsStateMachine.applyPhysicsState(forces.netThrust(), this.getTotalMass(), pos, this.level);
         
-        PhysicsStateMachine.applyPhysicsState(netThrust, this.getTotalMass(), pos, this.level);
-        
-        // 3. Modifica effettiva della velocità del treno
-        this.speed += (netThrust / this.getTotalMass());
+        // Modifica la velocità
+        this.speed += (forces.netThrust() / this.getTotalMass());
     }
+}
+
+// Helper per calcolare la massa totale (Create non lo fa nativamente per tutte le carrozze)
+public double getTotalMass() {
+    double totalMass = 0;
+    for (var carriage : this.carriages) {
+        // Assumendo che ogni carrozza abbia un peso base + peso contenuto
+        totalMass += 1000.0; // Esempio: 1000 unità di massa per carrozza
+    }
+    return totalMass;
 }
